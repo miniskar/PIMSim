@@ -205,7 +205,7 @@ def rfind(l, elt, offs = -1):
     for i in range(len(l)+offs, 0, -1):
         if l[i] == elt:
             return i
-    raise ValueError, "element not found"
+    raise ValueError("element not found")
 
 # Take a list of paths (or SCons Nodes) and return a list with all
 # paths made absolute and ~-expanded.  Paths will be interpreted
@@ -371,6 +371,10 @@ if main['GCC'] or main['CLANG']:
     main.Append(CCFLAGS=['-Werror',
 			 '-Wno-unused-variable',
                          '-Wno-error=deprecated-declarations',
+			 '-Wno-error=deprecated-copy',
+                         '-Wno-error=bool-compare',
+		 	 '-Wno-error=array-bounds',
+			 '-Wno-error=address-of-packed-member',
                          '-Wno-error=deprecated',
                         ])
 else:
@@ -926,7 +930,7 @@ class CpuModel(object):
 
         # Add self to dict
         if name in CpuModel.dict:
-            raise AttributeError, "CpuModel '%s' already registered" % name
+            raise AttributeError("CpuModel '%s' already registered" % name)
         CpuModel.dict[name] = self
 
 Export('CpuModel')
